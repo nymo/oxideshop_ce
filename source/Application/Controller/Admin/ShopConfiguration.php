@@ -153,6 +153,11 @@ class ShopConfiguration extends \OxidEsales\Eshop\Application\Controller\Admin\A
                             continue;
                         }
                         $this->saveSetting($configName, $existingConfigType, $newConfigValue);
+
+                        if ($configName == 'blUnloadAllShopNews') {
+                            $shopMall = oxNew(\OxidEsales\Eshop\Application\Controller\Admin\ShopMall::class);
+                            $shopMall->changeNewsInheritanceForMultishop(!filter_var($newConfigValue, FILTER_VALIDATE_BOOLEAN));
+                        }
                     }
                 }
             }
