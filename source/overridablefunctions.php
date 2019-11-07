@@ -37,6 +37,19 @@ if (!function_exists('redirectIfShopNotConfigured')) {
     }
 }
 
+if (!function_exists('getShopRootPath')) {
+    /**
+     * Returns framework root path.
+     *
+     * @return string
+     */
+    function getShopRootPath()
+    {
+        return OX_ROOT_PATH;
+    }
+}
+
+
 if (!function_exists('getShopBasePath')) {
     /**
      * Returns framework base path.

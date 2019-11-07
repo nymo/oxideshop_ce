@@ -31,6 +31,7 @@ class Utilities extends Core
 
     const DEMODATA_SQL_FILENAME = 'demodata.sql';
     const LICENSE_TEXT_FILENAME = "lizenz.txt";
+    const DEFAULT_LICENSE_TEXT_FILENAME = "LICENSE";
 
     /**
      * Unable to find file
@@ -515,6 +516,16 @@ class Utilities extends Core
     }
 
     /**
+     * Get root directory
+     *
+     * @return string
+     */
+    public function getRootDirectory()
+    {
+        return $this->getEditionPathProvider()->getRootDirectory();
+    }
+
+    /**
      * Get setup directory
      *
      * @return string
@@ -582,6 +593,7 @@ class Utilities extends Core
      * Returns the contents of license agreement in requested language.
      *
      * @param string $languageId
+     *
      * @return string
      */
     public function getLicenseContent($languageId)
@@ -591,7 +603,12 @@ class Utilities extends Core
             ucfirst($languageId),
             self::LICENSE_TEXT_FILENAME
         ];
+
         $licensePath = implode(DIRECTORY_SEPARATOR, $licensePathElements);
+
+        if (!file_exists($licensePath)) {
+            $licensePath = $this->getRootDirectory() . self::DEFAULT_LICENSE_TEXT_FILENAME;
+        }
 
         $licenseContent = $this->getFileContents($licensePath);
 

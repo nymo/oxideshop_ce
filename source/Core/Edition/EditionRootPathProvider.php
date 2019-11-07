@@ -55,6 +55,24 @@ class EditionRootPathProvider
     }
 
     /**
+     * Returns path to edition root directory. If no additional editions are found, returns root path.
+     *
+     * @return string
+     */
+    public function getRootDirectory()
+    {
+        $editionsPath = VENDOR_PATH . static::EDITIONS_DIRECTORY;
+        $path = getShopRootPath();
+        if ($this->getEditionSelector()->isEnterprise()) {
+            $path = $editionsPath  .'/'. static::ENTERPRISE_DIRECTORY;
+        } elseif ($this->getEditionSelector()->isProfessional()) {
+            $path = $editionsPath .'/'.  static::PROFESSIONAL_DIRECTORY;
+        }
+
+        return realpath($path) . DIRECTORY_SEPARATOR;
+    }
+
+    /**
      * @return EditionSelector
      */
     protected function getEditionSelector()

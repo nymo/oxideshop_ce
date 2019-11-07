@@ -32,6 +32,16 @@ class EditionPathProvider
     }
 
     /**
+     * Method forms path to corresponding edition root directory.
+     *
+     * @return string
+     */
+    public function getRootDirectory()
+    {
+        return $this->getEditionRootPathProvider()->getRootDirectory();
+    }
+
+    /**
      * Method forms path to corresponding edition setup directory.
      *
      * @return string
